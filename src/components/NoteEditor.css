@@ -1,0 +1,93 @@
+/* NoteEditor.css */
+.editor-container {
+  min-height: 100vh;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+  color: white;
+  font-family: "Times New Roman", serif;
+}
+
+.editor-box {
+  max-width: 768px;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 30px rgba(150, 150, 255, 0.1);
+  backdrop-filter: blur(12px);
+  transition: all 0.4s ease;
+}
+
+.editor-title {
+  font-size: 2.25rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px rgba(200, 200, 255, 0.2);
+}
+
+.editor-loading {
+  text-align: center;
+  color: #bbb;
+}
+
+.editor-input,
+.editor-textarea {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  font-family: "Times New Roman", serif;
+}
+
+.editor-input::placeholder,
+.editor-textarea::placeholder {
+  color: #888;
+}
+
+.editor-textarea {
+  min-height: 15rem;
+  resize: none;
+}
+
+.editor-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.editor-save,
+.editor-discard {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-family: "Times New Roman", serif;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.editor-save {
+  background-color: #4ade80;
+  color: black;
+  box-shadow: 0 0 12px #22c55e88;
+}
+
+.editor-save:hover {
+  box-shadow: 0 0 20px #22c55eaa;
+}
+
+.editor-discard {
+  background-color: #ef4444;
+  color: white;
+  box-shadow: 0 0 12px #dc262688;
+}
+
+.editor-discard:hover {
+  box-shadow: 0 0 20px #dc2626aa;
+}

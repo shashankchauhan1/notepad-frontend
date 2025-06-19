@@ -2,7 +2,7 @@ import axios from "axios";
 
 // ✅ Set this to your deployed backend URL
 const api = axios.create({
-  baseURL: "https://notepad-backend-dn97.onrender.com",
+  baseURL: "https://notepad-backend-dn97.onrender.com/api",
   headers: {
     "Content-Type": "application/json",
   },

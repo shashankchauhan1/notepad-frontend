@@ -1,21 +1,25 @@
 import axios from "axios";
 
+// ✅ Set this to your deployed backend URL
 const api = axios.create({
-  baseURL: "http://localhost:7000/api", // ✅ Update as needed for production
+  baseURL: "https://notepad-backend-dn97.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// ✅ Attach token to every request if available
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+// ✅ Automatically attach token to every request if available
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-  return config;
-}, (error) => {
-  return Promise.reject(error);
-});
+);
 
 export default api;

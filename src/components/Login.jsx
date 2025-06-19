@@ -12,8 +12,8 @@ const Login = () => {
     try {
       const res = await api.post("/auth/login", { email, password });
       localStorage.setItem("token", res.data.token);
-      alert("Login successful!");
-      navigate("/");
+      alert("Login successful!");    
+      window.location.href = "/";
     } catch (err) {
       alert(err.response?.data?.message || "Login failed.");
     }

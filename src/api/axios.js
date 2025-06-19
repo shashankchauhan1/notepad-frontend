@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://notepad-backend-dn97.onrender.com/api",  // ✅ Corrected path
+  baseURL: "https://notepad-backend-dn97.onrender.com/api", 
   headers: {
     "Content-Type": "application/json",
   },

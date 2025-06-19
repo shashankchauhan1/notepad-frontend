@@ -37,8 +37,8 @@ const NotesList = () => {
   };
 
   return (
-    <div className="min-h-screen px-6 py-10 bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#1c1c1c] text-white font-serif">
-      <div className="flex items-center justify-between mb-10">
+    <div className="min-h-screen px-4 sm:px-6 py-10 bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#1c1c1c] text-white font-serif">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
         <button
           onClick={() => navigate("/")}
           className="text-gray-300 hover:text-white flex items-center gap-2 text-sm font-semibold transition-all"
@@ -60,7 +60,7 @@ const NotesList = () => {
       </div>
 
       <h1
-        className="text-4xl text-center font-bold mb-10"
+        className="text-3xl sm:text-4xl text-center font-bold mb-10"
         style={{
           textShadow: "0 0 14px rgba(255, 255, 255, 0.12)",
           fontFamily: "Georgia, serif",
@@ -85,7 +85,8 @@ const NotesList = () => {
                   e.stopPropagation();
                   handleDelete(note._id);
                 }}
-                className="absolute top-3 right-3 bg-gradient-to-tr from-red-600 to-red-500 hover:brightness-110 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-md"
+                className="absolute top-3 right-3 bg-gradient-to-tr from-red-600 to-red-500 hover:brightness-110 text-white p-1.5 rounded-full 
+                opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all shadow-md"
                 title="Delete"
               >
                 <FaTrash size={12} />

@@ -53,7 +53,7 @@ const NoteEditor = () => {
   const handleDiscard = () => {
     const confirmDiscard = window.confirm("Are you sure you want to discard this note?");
     if (confirmDiscard) {
-      navigate("/"); // ✅ back to Welcome page
+      navigate("/");
     }
   };
 
@@ -61,7 +61,7 @@ const NoteEditor = () => {
     <div className="editor-container">
       <div className="editor-box">
         <h1 className="editor-title">
-          {id ? "✏️ Edit Your Royal Note" : "📝 Write a Regal Thought"}
+          {id ? "✏️ Edit Your Note" : "📝 Write Your Note"}
         </h1>
 
         {loading ? (
@@ -85,10 +85,10 @@ const NoteEditor = () => {
 
             <div className="editor-buttons">
               <button onClick={handleSave} className="editor-save">
-                💾 Save Note
+                <strong>💾 Save Note </strong>
               </button>
               <button onClick={handleDiscard} className="editor-discard">
-                ❌ Discard
+                <strong>❌ Discard</strong>
               </button>
             </div>
           </>

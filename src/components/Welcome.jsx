@@ -7,10 +7,11 @@ const Welcome = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#1e1e1e] text-white px-4 text-center welcome-container">
       <h1 className="text-4xl md:text-5xl font-bold mb-4 fade-slide-up">
-        Welcome to <span className="text-purple-400">Secure Notepad</span>
+        Welcome to <span className="text-purple-400">NottePreziosa </span>
       </h1>
       <p className="text-gray-400 mb-8 max-w-md text-lg fade-slide-up">
-        Your private notes, safely stored in the cloud. Write, save, and access anywhere — even if your phone goes missing.
+        Your private notes. Write, save, and access anywhere — Write with intention. Keep it safe. Keep it timeless.
+        <p style={{color:"#00ffffd9"}}>NottePreziosa — because in a noisy world, privacy is power</p>
       </p>
       <div className="flex flex-col sm:flex-row gap-4 fade-slide-up">
         <button

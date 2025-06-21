@@ -9,20 +9,34 @@ const NotesList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchNotes = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Session expired. Please login again.");
+      navigate("/login");
+      return;
+    }
+
+    const wakeAndFetch = async () => {
       try {
+        // Wake up the Render server
+        await fetch("https://notepad-backend-dn97.onrender.com/");
         const res = await api.get("/notes");
         setNotes(res.data);
       } catch (err) {
-        console.error("Failed to fetch notes:", err);
-        alert("Error fetching notes");
+        console.error("Failed to fetch notes:", err.response?.data || err.message);
+        if (err.response?.status === 403) {
+          alert("Unauthorized. Please login again.");
+          navigate("/login");
+        } else {
+          alert("Error fetching notes.");
+        }
       } finally {
         setLoading(false);
       }
     };
 
-    fetchNotes();
-  }, []);
+    wakeAndFetch();
+  }, [navigate]);
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Delete this note?");
@@ -31,7 +45,7 @@ const NotesList = () => {
       await api.delete(`/notes/${id}`);
       setNotes((prev) => prev.filter((note) => note._id !== id));
     } catch (err) {
-      console.error("Error deleting note:", err);
+      console.error("Error deleting note:", err.response?.data || err.message);
       alert("Failed to delete");
     }
   };
@@ -85,18 +99,14 @@ const NotesList = () => {
                   e.stopPropagation();
                   handleDelete(note._id);
                 }}
-                className="absolute top-3 right-3 bg-gradient-to-tr from-red-600 to-red-500 hover:brightness-110 text-white p-1.5 rounded-full 
-                opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all shadow-md"
+                className="absolute top-3 right-3 bg-gradient-to-tr from-red-600 to-red-500 hover:brightness-110 text-white p-1.5 rounded-full opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all shadow-md"
                 title="Delete"
               >
                 <FaTrash size={12} />
               </button>
 
               <div onClick={() => navigate(`/notes/${note._id}`)}>
-                <h2
-                  className="text-xl font-semibold mb-2 truncate"
-                  style={{ fontFamily: "Georgia, serif", fontWeight: 600 }}
-                >
+                <h2 className="text-xl font-semibold mb-2 truncate">
                   {note.title || "Untitled"}
                 </h2>
                 <p className="text-sm text-gray-300 max-h-[100px] overflow-hidden leading-relaxed">

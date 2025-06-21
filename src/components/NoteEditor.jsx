@@ -13,14 +13,22 @@ const NoteEditor = () => {
 
   useEffect(() => {
     const fetchNote = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Please login to edit your note.");
+        navigate("/login");
+        return;
+      }
+
       if (!id) return;
       try {
         setLoading(true);
+        await fetch("https://notepad-backend-dn97.onrender.com/"); // wake-up
         const res = await api.get(`/notes/${id}`);
         setTitle(res.data.title || "");
         setContent(res.data.content || "");
       } catch (err) {
-        console.error("Error fetching note:", err);
+        console.error("Error fetching note:", err.response?.data || err.message);
         alert("Failed to load note for editing.");
       } finally {
         setLoading(false);
@@ -28,7 +36,7 @@ const NoteEditor = () => {
     };
 
     fetchNote();
-  }, [id]);
+  }, [id, navigate]);
 
   const handleSave = async () => {
     if (!title.trim() && !content.trim()) {
@@ -43,9 +51,9 @@ const NoteEditor = () => {
         await api.post("/notes", { title, content });
       }
       alert("Note saved successfully!");
-      navigate("/notes"); // ✅ redirect to View Notes
+      navigate("/notes");
     } catch (err) {
-      console.error("Save failed:", err);
+      console.error("Save failed:", err.response?.data || err.message);
       alert("Error saving note.");
     }
   };

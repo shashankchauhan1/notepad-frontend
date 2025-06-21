@@ -5,28 +5,25 @@ import NotesList from "./components/NotesList";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 
-function App() {
-  const isAuthenticated = !!localStorage.getItem("token");
+// Protected route wrapper
+const ProtectedRoute = ({ element }) => {
+  const token = localStorage.getItem("token");
+  return token ? element : <Navigate to="/login" />;
+};
 
+function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Show Welcome if logged in, else Login */}
-        <Route
-          path="/"
-          element={
-            isAuthenticated ? <Welcome /> : <Navigate to="/login" />
-          }
-        />
-
+        <Route path="/" element={<ProtectedRoute element={<Welcome />} />} />
+        <Route path="/welcome" element={<ProtectedRoute element={<Welcome />} />} />
+        <Route path="/notes" element={<ProtectedRoute element={<NotesList />} />} />
+        <Route path="/notes/new" element={<ProtectedRoute element={<NoteEditor />} />} />
+        <Route path="/notes/:id" element={<ProtectedRoute element={<NoteEditor />} />} />
+        <Route path="/editor" element={<ProtectedRoute element={<NoteEditor />} />} />
+        
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/welcome" element={<Welcome />} /> {/* Optional extra route */}
-
-        <Route path="/notes" element={<NotesList />} />
-        <Route path="/notes/new" element={<NoteEditor />} />
-        <Route path="/notes/:id" element={<NoteEditor />} />
-        <Route path="/editor" element={<NoteEditor />} />
       </Routes>
     </BrowserRouter>
   );

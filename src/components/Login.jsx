@@ -8,17 +8,23 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-  e.preventDefault();
-  try {
-    const res = await api.post("/auth/login", { email, password });
-    localStorage.setItem("token", res.data.token);
-    alert("Login successful!");
-    navigate("/welcome");
-  } catch (err) {
-    alert(err.response?.data?.message || "Login failed.");
-  }
-};
+    e.preventDefault();
+    try {
+      const res = await api.post("/auth/login", { email, password });
+      const token = res.data.token;
 
+      if (token) {
+        localStorage.setItem("token", token);
+        alert("Login successful!");
+        navigate("/notes");
+      } else {
+        alert("Login failed: No token received.");
+      }
+    } catch (err) {
+      alert(err.response?.data?.message || "Login failed.");
+      console.error("Login error:", err.response?.data || err.message);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0f0f0f] text-white">

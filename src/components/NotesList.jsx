@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { FaPlus, FaTrash, FaArrowLeft } from "react-icons/fa";
-import "./NotesList.css"; // ✅ external styles here
+import "./NoteList.css"; // ✅ external styles here
 
 const NotesList = () => {
   const [notes, setNotes] = useState([]);
